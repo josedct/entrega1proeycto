@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Simulador de un cajero automático</h1>
+    <p>Mi proyecto para el curso es realizar un simulador de cajero automático, este contara con las opciones básicas de un cajero: <br>-Ingresar con usuario y nip <br>-Ver saldo <br>-Retirar efectivo <br>-Ingresar efectivo <br>-Ver movimientos <br>-Hacer transferncias <br>-Pagar servicios <br>-Hacer una recarga de tiempo aire <br>-Salir <br>Para esto también voy a simular la cantidad de dinero disponible y tal ves el tanto de billetes que contendrá el cajero para manejarlo de una manera mas realista. <br> Me gustaría simular varias cuentas, ya que actualmete solo uso una y si quiero cambiar hay que recargar</p>
+
+    <h1>La interfaz del proyecto seria mas o menos asi:</h1>
+    <h2>Pantalla inicial</h2>
+    <form action="">
+        <label for="">Ingresa tu numero de cuenta:</label>
+        <input type="text">
+        <label for="">Ingresa tu nip:</label>
+        <input type="text">
+        <input type="submit" value="Entrar">
+    </form>
+    <hr>
+    <h2>Pantalla de menu</h2>
+    <button>Ver Saldo</button>
+    <button>Retirar</button>
+    <button>Despositar</button>
+    <button>Ver movimientos</button>
+    <button>Transferir</button>
+    <button>Pagar servicios</button>
+    <button>Recargar saldo</button>
+    <button>Salir</button>    
+    <hr>
+    <p>De cada menu ya saldria una pantalla emergente donde se ingresarian los datos necesarios para el movimiento. <br>Actualmente solo tengo implementado los movimientos basicos y el registrar cada uno de los movimientos.</p>
+    <script src="cajero.js"></script>
+</body>
+</html>
