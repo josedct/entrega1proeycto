@@ -61,6 +61,10 @@ const Movimientos = []
 // variable que guarda la opcion del menu elegida
 let opc = 0
 
+// variables del dom
+//let operaciones = document.querySelector(".operaciones ul")
+//let li = document.createElement("li")
+
 //funcion para obtener la fecha actual
 function fechaActual(){
     let fecha = new Date()
@@ -88,8 +92,12 @@ function simulaCajero(){
     let usuarioNip = prompt("Ingresa el NIP de tu tarjeta:\n")
     let indCuenta = findCuenta(usuarioTarjeta,usuarioNip)
     let moviString = ""
+    let operaciones = document.querySelector(".operaciones ul")
+    let li
     if (indCuenta > -1) {
+    li = document.createElement("li")
         do{
+            li = document.createElement("li")
             opc = Number(prompt("Cuenta::"+ Cuentas[indCuenta].verNumCuenta() +"\nMenu principal\n [ 1 ] Ver saldo\n [ 2 ] Depositar\n [ 3 ] Retirar\n [ 4 ] Ver movimientos\n [ 5 ]Salir\nEscriba el numero de la opción que desea:\n"))
             while(opc < 1 || opc > 5){
                 opc = prompt("Cuenta::"+ Cuentas[indCuenta].verNumCuenta() +"\nMenu principal\n *** Error ingrese una opción valida ***\n [ 1 ] Ver saldo\n [ 2 ] Depositar\n [ 3 ] Retirar\n [ 4 ] Ver movimientos\n [ 5 ] Salir\nEscriba el numero de la opción que desea:\n")
@@ -98,6 +106,8 @@ function simulaCajero(){
                 case 1:
                     //Muestra el saldo actual
                     alert("Saldo disponible: $" + Cuentas[indCuenta].verSaldo())
+                    li.innerHTML = "Saldo disponible: $" + Cuentas[indCuenta].verSaldo()
+                    operaciones.appendChild(li)
                     break
                 case 2:
                     //realiza un deposito y muestra el movimiento
@@ -105,6 +115,8 @@ function simulaCajero(){
                     Cuentas[indCuenta].depositarSaldo(deposito)
                     Movimientos.push(new Movimiento(Cuentas[indCuenta].verNumCuenta(),"Deposito", fechaActual(), "$"+deposito))
                     alert("Saldo Anterior:$"+(Cuentas[indCuenta].verSaldo()-deposito)+"\nDeposito:$"+deposito+"\nSaldo Actual:$"+Cuentas[indCuenta].verSaldo())
+                    li.innerHTML = "Saldo Anterior:$"+(Cuentas[indCuenta].verSaldo()-deposito)+"\nDeposito:$"+deposito+"\nSaldo Actual:$"+Cuentas[indCuenta].verSaldo()
+                    operaciones.appendChild(li)
                     break
                 case 3:
                     //realiza un retiro y muestra el movimiento
@@ -112,6 +124,8 @@ function simulaCajero(){
                     Cuentas[indCuenta].retirarSaldo(retiro)
                     Movimientos.push(new Movimiento(Cuentas[indCuenta].verNumCuenta(),"Retiro", fechaActual(), "$"+retiro))
                     alert("Saldo Anterior:$"+(Cuentas[indCuenta].verSaldo()+retiro)+"\nRetiro:$"+retiro+"\nSaldo Actual:$"+Cuentas[indCuenta].verSaldo())
+                    li.innerHTML = "Saldo Anterior:$"+(Cuentas[indCuenta].verSaldo()+retiro)+"\nRetiro:$"+retiro+"\nSaldo Actual:$"+Cuentas[indCuenta].verSaldo()
+                    operaciones.appendChild(li)
                     break
                 case 4:
                     if(Movimientos.length > 0){
@@ -119,16 +133,27 @@ function simulaCajero(){
                             moviString = moviString + movi.verMovimiento()+"\n"
                         }
                         alert("Historial de movimientos:\n"+moviString)
+                        li.innerHTML = "Historial de movimientos:\n"+moviString
+                        operaciones.appendChild(li)
                     }else{
                         alert("Historial de movimientos:\nSin movimientos")
+                        li.innerHTML = "Historial de movimientos:\nSin movimientos"
+                        operaciones.appendChild(li)
                     }
                     break
             }
         }while(opc != 5);
-        alert("Gracias por usar nuestro cajero\nVuelva pronto")   
+        alert("Gracias por usar nuestro cajero\nVuelva pronto")  
+        li.innerHTML = "Gracias por usar nuestro cajero\nVuelva pronto"
+        operaciones.appendChild(li) 
     } else {
         alert("Usuario no reconocido, recargue e intente nuevamente")
+        li.innerHTML = "Usuario no reconocido, recargue e intente nuevamente"
+        operaciones.appendChild(li) 
     }
+    moviString = ""
+    Movimientos.splice(0,Movimientos.length)
 }
 
-simulaCajero()
+let actSimu = document.querySelector(".iniSimu")
+actSimu.onclick = simulaCajero
